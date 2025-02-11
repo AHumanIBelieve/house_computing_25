@@ -23,26 +23,32 @@ List<string> GivePlayer(string newItem, int manyItems, List<string> newInv)
     return newInv;
 }
 
-int turns = 0;
-int oxygenLeft = 150; //i'm going to add the oxygen mechanic tmrw, after ~10 turns, you realise that you only have that much left.
+ //i'm going to add the oxygen mechanic tmrw, after ~10 turns, you realise that you only have that much left.
 
-Dictionary<string, string> communalArea = new Dictionary<string, string>()
+
+Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary<string, Dictionary<string, string>>
 {
-    ["name"] = "Communal Area",
-    ["north"] = "Sleeping Quarters",
-    ["south"] = "Kitchen",
-    ["east"] = "Command Centre",
-    ["west"] = "Engine Room",
-    ["description"] = "The smell of expired pizza fills the room. You never cleaned it very well."
+    ["Communal Area"] = new Dictionary<string, string>
+    {
+        ["coordinate"] = "12",
+        ["name"] = "Communal Area",
+        ["north"] = "Sleeping Quarters",
+        ["south"] = "Kitchen",
+        ["east"] = "Command Centre",
+        ["west"] = "Corridor to Engine Room",
+        ["description"] = "The smell of expired pizza fills the room. You never cleaned it very well."
+    },
+    ["Command Centre"] = new Dictionary<string, string>
+    {
+        ["coordinate"] = "11",
+        ["name"] = "Command Centre",
+        ["east"] = "Communal Area",
+        ["machine"] = "Pod Activator",
+        ["description"] = "You enter the command centre. You see a red keycard slot."
+    },
 };
 
-Dictionary<string, string> CommandCentre = new Dictionary<string, string>()
-{
-    ["name"] = "Command Centre",
-    ["east"] = "Communal Area",
-    ["machine"] = "Pod Activator",
-    ["description"] = "You enter the command centre. You see a red keycard slot."
-}; //can we get jack to write all these out, also add the int value for location in the dictionary below. also switch out the strings for ints ig
+ //can we get jack to write all these out, also add the int value for location in the dictionary below. also switch out the strings for ints ig
 
 Dictionary<int, string> gameboard = new Dictionary<int, string>
 {
@@ -56,8 +62,8 @@ Dictionary<int, string> gameboard = new Dictionary<int, string>
     [8] = "empty",
     [9] = "empty",
     [10] = "empty",
-    [11] = "empty",
-    [12] = "empty",
+    [11] = "Command Centre",
+    [12] = "Communal Area",
     [13] = "empty",
     [14] = "empty",
     [15] = "empty",
@@ -78,7 +84,10 @@ Dictionary<string, int> player = new Dictionary<string, int>
     ["Stamina"] = 100,
     ["Hunger"] = 100,
     ["Thirst"] = 100,
-    ["Health"] = 50
+    ["Health"] = 50,
+    ["Oxygen"] = 150,
+    ["Position"] = 0,
+    ["Turn"] = 0,
 };
 
 List<string> inventory = new List<string>();
@@ -87,10 +96,11 @@ string[] GetInput(string prompt)
 {
     Console.Clear();
     Console.Write("[");
-    for(int i =0; i < player["Health"]; i++)
+    for (int i = 0; i < player["Health"]; i++)
     {
         Console.Write("#");
-    } for(int i = 0; i < 50 - player["Health"]; i++)
+    }
+    for (int i = 0; i < 50 - player["Health"]; i++)
     {
         Console.Write("-");
     }
@@ -166,4 +176,4 @@ while (true)
 {
     Console.WriteLine("you play game");
 }
-int playerpos = 17; //start in the sleeping quarters
+player["position"] = 17; //start in the sleeping quarters
