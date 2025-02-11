@@ -8,51 +8,33 @@ void TypeWriter(string text)
     Console.WriteLine();
 }
 
-// NEW CODE
-List<string> GivePlayer(string newItem, int manyItems, List<string> newInv)
+Dictionary<string, int> player = new Dictionary<string, int>
 {
-    for(int i = manyItems; i >= 0; i--)
+    ["Stamina"] = 100,
+    ["Hunger"] = 100,
+    ["Thirst"] = 100,
+    ["Health"] = 50
+};
+List<string> inventory = new List<string>();
+
+string[] GetInput(string prompt)
+{
+    Console.Clear();
+    Console.Write("[");
+    for(int i =0; i < player["Health"]; i++)
     {
-        newInv.Add(newItem);
+        Console.Write("#");
+    } for(int i = 0; i < 50 - player["Health"]; i++)
+    {
+        Console.Write("-");
     }
-    return newInv;
+    Console.WriteLine("]");
+    TypeWriter($"{prompt}");
+    Console.Write("> ");
+    string inputog = Console.ReadLine();
+    string[] input = inputog.Split(' ');
+    return input;
 }
-
-// END OF NEW CODE
-
-
-Console.WriteLine("╔═╗╔═╗    ╔╗               ╔╗            ╔═══╗                 \r\n║║╚╝║║    ║║              ╔╝╚╗           ║╔═╗║                 \r\n║╔╗╔╗║╔╗╔╗║║ ╔══╗╔══╗ ╔══╗╚╗╔╝╔══╗╔═╗    ║║ ╚╝╔══╗ ╔╗╔╗╔══╗╔══╗\r\n║║║║║║║║║║║║ ║╔═╝╚ ╗║ ║══╣ ║║ ║╔╗║║╔╝    ║║╔═╗╚ ╗║ ║╚╝║║╔╗║║══╣\r\n║║║║║║║╚╝║║╚╗║╚═╗║╚╝╚╗╠══║ ║╚╗║║═╣║║     ║╚╩═║║╚╝╚╗║║║║║║═╣╠══║\r\n╚╝╚╝╚╝╚══╝╚═╝╚══╝╚═══╝╚══╝ ╚═╝╚══╝╚╝     ╚═══╝╚═══╝╚╩╩╝╚══╝╚══╝\r\n                                                               \r\n                                                               ");
-
-
-Dictionary<string, int> attributes = new Dictionary<string, int>
-{
-    ["Stamina"] = 100,
-    ["Hunger"] = 100,
-    ["Thirst"] = 100,
-    ["Health"] = 100
-};
-
-
-
-List<string> inventory = new List<string>();
-
-
-/*void TypeWriter(string text)
-{
-    foreach (char c in text)
-    {
-
-    }
-}*/
-
-Dictionary<string, int> attributes = new Dictionary<string, int>
-{
-    ["Stamina"] = 100,
-    ["Hunger"] = 100,
-    ["Thirst"] = 100,
-    ["Health"] = 100
-};
-List<string> inventory = new List<string>();
 
 void GameIntro()
 {
@@ -85,3 +67,5 @@ void GameIntro()
     Console.ReadLine();
     Console.Clear();
 }
+
+GameIntro();
