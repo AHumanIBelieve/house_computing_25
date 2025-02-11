@@ -8,6 +8,49 @@ void TypeWriter(string text)
     Console.WriteLine();
 }
 
+void RoomSay(int position, Dictionary<int, string> rooms)
+{
+    Console.WriteLine($"You are in the {rooms[position]}");
+}
+
+List<string> GivePlayer(string newItem, int manyItems, List<string> newInv)
+{
+    for (int i = manyItems; i >= 0; i--)
+    {
+        newInv.Add(newItem);
+    }
+    return newInv;
+}
+
+Dictionary<int, string> gameboard = new Dictionary<int, string>
+{
+    [1] = "empty",
+    [2] = "empty",
+    [3] = "empty",
+    [4] = "empty",
+    [5] = "empty",
+    [6] = "empty",
+    [7] = "empty",
+    [8] = "empty",
+    [9] = "empty",
+    [10] = "empty",
+    [11] = "empty",
+    [12] = "empty",
+    [13] = "empty",
+    [14] = "empty",
+    [15] = "empty",
+    [16] = "empty",
+    [17] = "Sleeping Quarters",
+    [18] = "empty",
+    [19] = "empty",
+    [20] = "empty",
+    [21] = "empty",
+    [22] = "empty",
+    [23] = "empty",
+    [24] = "empty",
+    [25] = "empty"
+};
+
 Dictionary<string, int> player = new Dictionary<string, int>
 {
     ["Stamina"] = 100,
@@ -15,6 +58,7 @@ Dictionary<string, int> player = new Dictionary<string, int>
     ["Thirst"] = 100,
     ["Health"] = 50
 };
+
 List<string> inventory = new List<string>();
 
 string[] GetInput(string prompt)
@@ -35,6 +79,8 @@ string[] GetInput(string prompt)
     string[] input = inputog.Split(' ');
     return input;
 }
+
+
 
 void GameIntro()
 {
@@ -69,3 +115,4 @@ void GameIntro()
 }
 
 GameIntro();
+int playerpos = 17; //start in the sleeping quarters
