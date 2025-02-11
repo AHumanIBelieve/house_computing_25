@@ -1,10 +1,12 @@
-/*void TypeWriter(string text)
+void TypeWriter(string text)
 {
     foreach (char c in text)
     {
-
+        Console.Write(c);
+        Thread.Sleep(50);
     }
-}*/
+    Console.WriteLine();
+}
 
 Dictionary<string, int> attributes = new Dictionary<string, int>
 {
