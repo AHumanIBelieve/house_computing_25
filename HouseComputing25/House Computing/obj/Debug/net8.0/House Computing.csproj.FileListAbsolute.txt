@@ -1,0 +1,14 @@
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\House Computing.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\House Computing.AssemblyInfoInputs.cache
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\House Computing.AssemblyInfo.cs
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\House Computing.csproj.CoreCompileInputs.cache
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\bin\Debug\net8.0\House Computing.exe
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\bin\Debug\net8.0\House Computing.deps.json
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\bin\Debug\net8.0\House Computing.runtimeconfig.json
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\bin\Debug\net8.0\House Computing.dll
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\bin\Debug\net8.0\House Computing.pdb
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\House Computing.dll
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\refint\House Computing.dll
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\House Computing.pdb
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\House Computing.genruntimeconfig.cache
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\ref\House Computing.dll
