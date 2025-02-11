@@ -8,9 +8,10 @@ void TypeWriter(string text)
     Console.WriteLine();
 }
 
-void RoomSay(int position, Dictionary<int, string> rooms)
+string RoomSay(int position, Dictionary<int, string> rooms)
 {
-    Console.WriteLine($"You are in the {rooms[position]}");
+    string currentRoom = rooms[position];
+    return currentRoom;
 }
 
 List<string> GivePlayer(string newItem, int manyItems, List<string> newInv)
@@ -99,6 +100,30 @@ string[] GetInput(string prompt)
     string inputog = Console.ReadLine();
     string[] input = inputog.Split(' ');
     return input;
+}
+
+int MoveUp(int newpos)
+{
+    newpos += 5;
+    return newpos;
+}
+
+int MoveDown(int newpos)
+{
+    newpos -= 5;
+    return newpos;
+}
+
+int MoveRight(int newpos)
+{
+    newpos += 1;
+    return newpos;
+}
+
+int MoveLeft(int newpos)
+{
+    newpos -= 1;
+    return newpos;
 }
 
 
