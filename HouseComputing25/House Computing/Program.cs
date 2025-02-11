@@ -22,6 +22,27 @@ List<string> GivePlayer(string newItem, int manyItems, List<string> newInv)
     return newInv;
 }
 
+int turns = 0;
+int oxygenLeft = 150; //i'm going to add the oxygen mechanic tmrw, after ~10 turns, you realise that you only have that much left.
+
+Dictionary<string, string> communalArea = new Dictionary<string, string>()
+{
+    ["name"] = "Communal Area",
+    ["north"] = "Sleeping Quarters",
+    ["south"] = "Kitchen",
+    ["east"] = "Command Centre",
+    ["west"] = "Engine Room",
+    ["description"] = "The smell of expired pizza fills the room. You never cleaned it very well."
+};
+
+Dictionary<string, string> CommandCentre = new Dictionary<string, string>()
+{
+    ["name"] = "Command Centre",
+    ["east"] = "Communal Area",
+    ["machine"] = "Pod Activator",
+    ["description"] = "You enter the command centre. You see a red keycard slot."
+}; //can we get jack to write all these out, also add the int value for location in the dictionary below. also switch out the strings for ints ig
+
 Dictionary<int, string> gameboard = new Dictionary<int, string>
 {
     [1] = "empty",
@@ -115,4 +136,9 @@ void GameIntro()
 }
 
 GameIntro();
+
+while (true)
+{
+    Console.WriteLine("you play game");
+}
 int playerpos = 17; //start in the sleeping quarters
