@@ -1,3 +1,4 @@
+//will can you please go through and make sure all the room dictionaries match up with everything
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Diagnostics;
@@ -140,7 +141,7 @@ Dictionary<int, string> gameboard = new Dictionary<int, string>
     [12] = "Communal Area",
     [13] = "Engine Corridor",
     [14] = "Engine Room",
-    [16] = "Captain's Office",
+    [16] = "Captain's Quarters",
     [17] = "Sleeping Quarters",
     [18] = "Storeroom",
     [19] = "Escape Pods Corridor",
