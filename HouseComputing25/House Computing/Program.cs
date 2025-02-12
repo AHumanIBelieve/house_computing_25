@@ -8,24 +8,6 @@ void TypeWriter(string text)
     Console.WriteLine();
 }
 
-string RoomSay(int position, Dictionary<int, string> rooms)
-{
-    string currentRoom = rooms[position];
-    return currentRoom;
-}
-
-List<string> GivePlayer(string newItem, int manyItems, List<string> newInv)
-{
-    for (int i = manyItems; i >= 0; i--)
-    {
-        newInv.Add(newItem);
-    }
-    return newInv;
-}
-
- //i'm going to add the oxygen mechanic tmrw, after ~10 turns, you realise that you only have that much left.
-
-
 Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary<string, Dictionary<string, string>>
 {
     ["Communal Area"] = new Dictionary<string, string>
@@ -48,7 +30,7 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
     },
 };
 
- //can we get jack to write all these out, also add the int value for location in the dictionary below. also switch out the strings for ints ig
+//can we get jack to write all these out, also add the int value for location in the dictionary below. also switch out the strings for ints ig
 
 Dictionary<int, string> gameboard = new Dictionary<int, string>
 {
@@ -89,6 +71,26 @@ Dictionary<string, int> player = new Dictionary<string, int>
     ["Position"] = 0,
     ["Turn"] = 0,
 };
+
+string RoomSay(int position)
+{
+    string currentRoom = gameboard[position];
+    return currentRoom;
+}
+
+List<string> GivePlayer(string newItem, int manyItems, List<string> newInv)
+{
+    for (int i = manyItems; i >= 0; i--)
+    {
+        newInv.Add(newItem);
+    }
+    return newInv;
+}
+
+//i'm going to add the oxygen mechanic tmrw, after ~10 turns, you realise that you only have that much left.
+
+
+
 
 List<string> inventory = new List<string>();
 
@@ -171,9 +173,9 @@ void GameIntro()
 }
 
 GameIntro();
+player["Position"] = 17; //start in the sleeping quarters
 
-while (true)
+while (player["Health"] > 0)
 {
-    Console.WriteLine("you play game");
-}
-player["position"] = 17; //start in the sleeping quarters
+    int playerpos = player["position"];
+    string currentRoomDesc = roomDescriptions[Convert.ToString(RoomSay(playerpos))];
