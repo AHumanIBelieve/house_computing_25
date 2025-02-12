@@ -23,7 +23,7 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["south"] = "Kitchen",
         ["east"] = "Command Centre",
         ["west"] = "Corridor to Engine Room",
-        ["description"] = "The smell of expired pizza fills the room. You never cleaned it very well."
+        ["Description"] = "The smell of expired pizza fills the room. You never cleaned it very well."
     },
     ["Command Centre"] = new Dictionary<string, string>
     {
@@ -31,7 +31,7 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["name"] = "Command Centre",
         ["east"] = "Communal Area",
         ["item"] = "Pod Activator",
-        ["description"] = "Buttons and switches are eveywhere under the monitor system. Flashing panels illuminate the room, and reveal a [COLOR] keycard slot."
+        ["Description"] = "Buttons and switches are eveywhere under the monitor system. Flashing panels illuminate the room, and reveal a [COLOR] keycard slot."
     },
     ["Sleeping Quarters"] = new Dictionary<string, string>
     {
@@ -41,20 +41,21 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["east"] = "Store Room",
         ["west"] = "Captain's Office",
         ["south"] = "Communal Area",
+        ["Description"] = "The beds are neatly made, although covered in dust. A faint scent of old cologne can be smelt, with rubbish and banana peels scattered everywhere."
     },
     ["Captain's office"] = new Dictionary<string, string>
     {
         ["coordinate"] = "16",
         ["name"] = "Captain's Office",
         ["east"] = "Communal Area",
-        ["description"] = "The desk is tidy, with a comfy leather chair tucked into it. A computer terminal blinks on the desk, with a keycard laying beside it."
+        ["Description"] = "The desk is tidy, with a comfy leather chair tucked into it. A computer terminal blinks on the desk, with a keycard laying beside it."
     },
     ["Gym"] = new Dictionary<string, string>
     {
         ["coordinate"] = "6",
         ["name"] = "Gym",
         ["east"] = "Kitchen",
-        ["description"] = "The smell of sweat linger around the room. Weight racks and treadmills are stacked neatly near the exit, with corpses lying over the sweaty gym machines."
+        ["Description"] = "The smell of sweat linger around the room. Weight racks and treadmills are stacked neatly near the exit, with corpses lying over the sweaty gym machines."
     },
     ["Engine Room"] = new Dictionary<string, string>
     {
@@ -63,28 +64,28 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["north"] = "Corridor to Escape Pods",
         ["south"] = "Corridor to Warp Core",
         ["west"] = "Corridor to Communal Area",
-        ["description"] = "The engines hum quietly but constantly. A mysterious goo drips from the side of the fuel canisters, which are neatly stacked by the entrance."
+        ["Description"] = "The engines hum quietly but constantly. A mysterious goo drips from the side of the fuel canisters, which are neatly stacked by the entrance."
     },
     ["Kitchen"] = new Dictionary<string, string>
     {
         ["coordinate"] = "7",
         ["name"] = "Kitchen",
         ["north"] = "Communal Area",
-        ["description"] = "The kitchen smells faintly of old food, though the counters are clean. A golden gun rests on one of the countertops, although it seems broken."
+        ["Description"] = "The kitchen smells faintly of old food, though the counters are clean. A golden gun rests on one of the countertops, although it seems broken."
     },
     ["Study"] = new Dictionary<string, string>
     {
         ["coordinate"] = "22",
         ["name"] = "Study",
         ["south"] = "Sleeping Quarters",
-        ["description"] = "Bookshelves line the rooms, full of findings from other astronauts. An ocarina sits in the corner, although it looks shaped by time.",
+        ["Description"] = "Bookshelves line the rooms, full of findings from other astronauts. An ocarina sits in the corner, although it looks shaped by time.",
     },
     ["Escape Pods"] = new Dictionary<string, string>
     {
         ["coordinate"] = "24",
         ["name"] = "Escape Pods",
         ["south"] = "Corridor to Engine Room",
-        ["description"] = "All the escape pods are gone, except for one. It seems to be locked but a [OTHER COLOUR] keycard could open it."
+        ["Description"] = "All the escape pods are gone, except for one. It seems to be locked but a [OTHER COLOUR] keycard could open it."
     },
     ["Storeroom"] = new Dictionary<string, string>
     {
@@ -92,7 +93,7 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["name"] = "Storeroom",
         ["west"] = "Sleeping Quarters",
         ["item"] = "Keycard",
-        ["description"] = "The shelves look freshly stocked, and untouched. Most of the boxes seem pristine or untouched, although the box for whips, cowboy hats and small golden statues have been ransacked, where a keycard now lays."
+        ["Description"] = "The shelves look freshly stocked, and untouched. Most of the boxes seem pristine or untouched, although the box for whips, cowboy hats and small golden statues have been ransacked, where a keycard now lays."
     },
     ["Warp Core"] = new Dictionary<string, string>
     {
@@ -107,7 +108,7 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["name"] = "Warp Core Corridor",
         ["north"] = "Engine Room",
         ["south"] = "Warp Core",
-        ["description"] = "It's a corridor."
+        ["Description"] = "It's a corridor."
     },
     ["Escape Pods Corridor"] = new Dictionary<string, string>
     {
@@ -115,7 +116,7 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["name"] = "Escape Pods Corridor",
         ["north"] = "Warp Core",
         ["south"] = "Engine Room",
-        ["description"] = "It's a corridor."
+        ["Description"] = "It's a corridor."
     },
     ["Engine Corridor"] = new Dictionary<string, string>
     {
@@ -123,7 +124,7 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["name"] = "Engine Corridor",
         ["left"] = "Communal Area",
         ["right"] = "Engine Room",
-        ["description"] = "It's a corridor."
+        ["Description"] = "It's a corridor."
     }
 };
 
@@ -360,8 +361,8 @@ while (player["Health"] > 0)
 {
     int playerpos = player["Position"];
     string roomName = gameboard[playerpos];
-    string currentRoomDesc = roomDescriptions[roomName]["description"];
     var room = roomDescriptions[roomName];
+    string currentRoomDesc = room["Description"];
     bool validinput = false;
     Console.Clear();
     Console.Write("[");
@@ -444,7 +445,7 @@ while (player["Health"] > 0)
     }
     player["Position"] = playerpos;
     roomName = gameboard[playerpos];
-    currentRoomDesc = roomDescriptions[roomName]["description"];
+    currentRoomDesc = roomDescriptions[roomName]["Description"];
     room = roomDescriptions[roomName];
     if (!warpCoreWorking || !engineWorking)
     {
