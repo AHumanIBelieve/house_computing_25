@@ -1,4 +1,3 @@
-//will can you please go through and make sure all the room dictionaries match up with everything
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Diagnostics;
@@ -32,7 +31,7 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["name"] = "Command Centre",
         ["east"] = "Communal Area",
         ["item"] = "Pod Activator",
-        ["Description"] = "Buttons and switches are eveywhere under the monitor system. Flashing panels illuminate the room, and reveal a [COLOR] keycard slot."
+        ["Description"] = "Buttons and switches are eveywhere under the monitor system. Flashing panels illuminate the room, and there is a small keyhole under a plexiglass cover."
     },
     ["Sleeping Quarters"] = new Dictionary<string, string>
     {
@@ -44,19 +43,19 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["south"] = "Communal Area",
         ["Description"] = "The beds are neatly made, although covered in dust. A faint scent of old cologne can be smelt, with rubbish and banana peels scattered everywhere."
     },
-    ["Captain's office"] = new Dictionary<string, string>
+    ["Captain's Quarters"] = new Dictionary<string, string>
     {
         ["coordinate"] = "16",
-        ["name"] = "Captain's Office",
+        ["name"] = "Captain's Quarters",
         ["east"] = "Communal Area",
-        ["Description"] = "The desk is tidy, with a comfy leather chair tucked into it. A computer terminal blinks on the desk, with a keycard laying beside it."
+        ["Description"] = "The desk is tidy, with a comfy leather chair tucked into it. A safe is neatly tucked under the desk."
     },
     ["Gym"] = new Dictionary<string, string>
     {
         ["coordinate"] = "6",
         ["name"] = "Gym",
         ["east"] = "Kitchen",
-        ["Description"] = "The smell of sweat linger around the room. Weight racks and treadmills are stacked neatly near the exit, with corpses lying over the sweaty gym machines."
+        ["Description"] = "The smell of sweat lingers around the room. Weight racks and treadmills are stacked neatly near the exit, with corpses lying over the sweaty gym machines."
     },
     ["Engine Room"] = new Dictionary<string, string>
     {
@@ -65,7 +64,7 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["north"] = "Corridor to Escape Pods",
         ["south"] = "Corridor to Warp Core",
         ["west"] = "Corridor to Communal Area",
-        ["Description"] = "The engines hum quietly but constantly. A mysterious goo drips from the side of the fuel canisters, which are neatly stacked by the entrance."
+        ["Description"] = "The engines hum quietly but constantly. Goopy, viscous oil drips from the side of the fuel canisters, which are neatly stacked by the entrance."
     },
     ["Kitchen"] = new Dictionary<string, string>
     {
@@ -79,14 +78,14 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["coordinate"] = "22",
         ["name"] = "Study",
         ["south"] = "Sleeping Quarters",
-        ["Description"] = "Bookshelves line the rooms, full of findings from other astronauts. An ocarina sits in the corner, although it looks shaped by time.",
+        ["Description"] = "Bookshelves line the rooms, full of findings from other astronauts. An ocarina sits in the corner, although it looks eroded by time.",
     },
     ["Escape Pods"] = new Dictionary<string, string>
     {
         ["coordinate"] = "24",
         ["name"] = "Escape Pods",
         ["south"] = "Corridor to Engine Room",
-        ["Description"] = "All the escape pods are gone, except for one. It seems to be locked but a [OTHER COLOUR] keycard could open it."
+        ["Description"] = "All the escape pods are gone, except for one. It seems to be locked but a sign reads 'UNLOCK FROM COMMAND CENTRE'."
     },
     ["Storeroom"] = new Dictionary<string, string>
     {
@@ -101,7 +100,7 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
         ["coordinate"] = "4",
         ["name"] = "Warp Core",
         ["north"] = "Warp Core Corridor",
-        ["Description"] = "The core pulses silently, with a faint glow in the dim room. The room is quite chilly, to store the core at the right temperature."
+        ["Description"] = "The warp core pulses silently, with a faint glow in the dim room. The room is quite chilly, to store the core at the right temperature."
     },
     ["Warp Core Corridor"] = new Dictionary<string, string>
     {
@@ -279,7 +278,7 @@ void GameIntro()
     Console.WriteLine("Game Instructions: \n" +
         "- use move [up/down/left/right] to move around the map \n" +
         "- use get [object] to add an object to your inventory \n" +
-        "- use search to search a room to find more items" +
+        "- use the map command to look at a map of the spacecraft \n" +
         "- have fun!\n" +
         "Your spacecraft is stranded in space. Your communications array has been destroyed. Your crew has died to a virus. You, being a " +
         "doctor, have managed to find a temporary anecdote but need to get off the craft as soon as possible. You know that the captain " +
@@ -336,9 +335,10 @@ GameIntro();
 player["Position"] = 17; //start in the sleeping quarters
 bool warpCoreWorking = true;
 bool engineWorking = true;
-int faultCountdown = 15;
+int faultCountdown = 7;
+int prevFaultCountdown = faultCountdown;
 bool podsUnlocked = false;
-int turns = 50;
+int turns = 35;
 
 string errorMessage(int countdown)
 {
@@ -376,6 +376,79 @@ while (player["Health"] > 0)
         Console.Write("-");
     }
     Console.WriteLine($"]HP       Location: {roomName}       Time left: {turns - player["Turn"]}");
+    if (!warpCoreWorking || !engineWorking)
+    {
+        if (faultCountdown <= prevFaultCountdown - 3)
+        {
+            if (gen.Next(1, 5) < 3)
+            {
+                int damage = gen.Next(1, 8) + 2;
+                player["Health"] -= damage;
+                TypeWriter($"The ship suddenly jolts. You take {damage} damage. You should fix it as soon as possible.");
+            }
+        }
+        faultCountdown--;
+    }
+    else if (player["Turn"] > 3 && warpCoreWorking && engineWorking)
+    {
+        int disaster = gen.Next(1, 20);
+        if (disaster < 3)
+        {
+            warpCoreWorking = false;
+        }
+        else if (disaster <= 5)
+        {
+            engineWorking = false;
+        }
+    }
+    if (warpCoreWorking == false && roomName == "Warp Core")
+    {
+        TypeWriter("The warp core is pulsating with unbridled power. You need to fix this, quick.");
+        int one = gen.Next(1, 100);
+        int two = gen.Next(1, 100);
+        TypeWriter($"Do some quick maths to fix the warp core. {one}x{two} = ");
+        if (int.Parse(Console.ReadLine()) == one * two)
+        {
+            warpCoreWorking = true;
+            faultCountdown = prevFaultCountdown;
+        }
+        else
+        {
+            TypeWriter("That's wrong, you'll need to try again next round.");
+        }
+    }
+    else if (engineWorking == false && roomName == "Engine Room")
+    {
+        TypeWriter("The sublight engine is sputtering and slightly on fire. You need to fix this, quick.");
+        int one = gen.Next(1, 100);
+        int two = gen.Next(1, 100);
+        TypeWriter($"Do some quick maths to fix the engine. {one}x{two} = ");
+        if (int.Parse(Console.ReadLine()) == one * two)
+        {
+            warpCoreWorking = true;
+            faultCountdown = prevFaultCountdown;
+        }
+        else
+        {
+            TypeWriter("That's wrong, you'll need to try again next round.");
+        }
+    }
+    if (roomName == "Captain's Quarters" && inventory.Contains("Keycard"))
+    {
+        TypeWriter("You find the safe hidden under the captain's guess. You swipe the keycard and a combination lock comes out. You don't know the code, but you put your ear to the lock and begin guessing.");
+        guessCode();
+        TypeWriter("You hear a series of clicks and you find a little red key labelled ESCAPE PODS in the bottom of it. You pick it up.");
+        GivePlayer("Podkey", 1);
+    }
+    else if (roomName == "Command Centre" && inventory.Contains("Podkey"))
+    {
+        TypeWriter("You find the keyhole under a plexiglass wall that says FOR EMERGENCIES ONLY. You insert the key into the lock and turn it, and an automated sound says 'ESCAPE PODS ACTIVATED'.");
+        podsUnlocked = true;
+    }
+    if (roomName == "Escape Pods" && podsUnlocked)
+    {
+        break;
+    }
     TypeWriter(errorMessage(faultCountdown));
     TypeWriter($"{currentRoomDesc}");
     string inventoryString = "Your inventory contains: ";
@@ -405,21 +478,33 @@ while (player["Health"] > 0)
         string[] input = inputog.Split(' ');
         if (input[0] == "move")
         {
-            if (input[1] == "up")
+            if (input[1] == "up" && gameboard.ContainsKey(MoveUp(playerpos)))
             {
-                playerpos = MoveUp(playerpos);
+                if (room.ContainsValue(gameboard[MoveUp(playerpos)]))
+                {
+                    playerpos = MoveUp(playerpos);
+                }
             }
-            else if (input[1] == "down")
+            else if (input[1] == "down" && gameboard.ContainsKey(MoveDown(playerpos)))
             {
-                playerpos = MoveDown(playerpos);
+                if (room.ContainsValue(gameboard[MoveDown(playerpos)]))
+                {
+                    playerpos = MoveDown(playerpos);
+                }
             }
-            else if (input[1] == "left")
+            else if (input[1] == "left" && gameboard.ContainsKey(MoveLeft(playerpos)))
             {
-                playerpos = MoveLeft(playerpos);
+                if (room.ContainsValue(gameboard[MoveLeft(playerpos)]))
+                {
+                    playerpos = MoveLeft(playerpos);
+                }
             }
-            else if (input[1] == "right")
+            else if (input[1] == "right" && gameboard.ContainsKey(MoveRight(playerpos)))
             {
-                playerpos = MoveRight(playerpos);
+                if (room.ContainsValue(gameboard[MoveRight(playerpos)]))
+                {
+                    playerpos = MoveRight(playerpos);
+                }
             }
             else
             {
@@ -438,13 +523,25 @@ while (player["Health"] > 0)
                 validinput = false;
             }
         }
-        else if (input[0] == "search")
+        else if (input[0] == "map")
         {
-            if (roomDescriptions[roomName].ContainsKey("hiddenItem"))
-            {
-                TypeWriter(roomDescriptions[roomName]["hiddenItemDescription"]);
-                GivePlayer(roomDescriptions[roomName]["hiddenItem"], 1);
-            }
+            Console.WriteLine("+-------------------------+-------------------------+-------------------------+-------------------------+\r\n" +
+                "|                         |        Study            |                         |        Escape pods      |\r\n" +
+                "|                         |                         |                         |        (escape)         |\r\n" +
+                "+-------------------------+----------   ------------+-------------------------+----------   ------------+\r\n" +
+                "|    Captain's Office     |       Sleeping          |        Store Room       |                         |\r\n" +
+                "|   (command centre key)          Quarters               (find key to safe)   |                         |\r\n" +
+                "+-------------------------+----------   ------------+-------------------------+----------   ------------+\r\n" +
+                "|                         |      Communal area      |                         |      Engine room        |\r\n" +
+                "|   Command centre                                                                                      |\r\n" +
+                "| (unlock escape pods)    |                         |                         |                         |\r\n" +
+                "+-------------------------+----------   ------------+-------------------------+----------   ------------+\r\n" +
+                "|        Gym                       Kitchen          |                         |                         |\r\n" +
+                "+-------------------------+-------------------------+-------------------------+----------   ------------+\r\n" +
+                "|                         |                         |                         |      Warp core          |\r\n" +
+                "+-------------------------+-------------------------+-------------------------+-------------------------+");
+            TypeWriter($"Your location is: {roomName}");
+            validinput = false;
         }
         else
         {
@@ -452,82 +549,6 @@ while (player["Health"] > 0)
         }
     }
     player["Position"] = playerpos;
-    roomName = gameboard[playerpos];
-    currentRoomDesc = roomDescriptions[roomName]["Description"];
-    room = roomDescriptions[roomName];
-    if (!warpCoreWorking || !engineWorking)
-    {
-        if (faultCountdown <= 12)
-        {
-            if (gen.Next(1, 5) < 3)
-            {
-                int damage = gen.Next(1, 8) + 2;
-                player["Health"] -= damage;
-                TypeWriter($"The ship suddenly jolts. You take {damage} damage. You should fix it as soon as possible.");
-            }
-        }
-        faultCountdown--;
-    }
-    else if (player["Turn"] > 5 && warpCoreWorking && engineWorking)
-    {
-        int disaster = gen.Next(1, 20);
-        if (disaster < 3)
-        {
-            warpCoreWorking = false;
-        }
-        else if (disaster <= 5)
-        {
-            engineWorking = false;
-        }
-    }
-    if (warpCoreWorking == false && roomName == "Warp Core")
-    {
-        TypeWriter("The warp core is pulsating with unbridled power. You need to fix this, quick.");
-        int one = gen.Next(1, 100);
-        int two = gen.Next(1, 100);
-        TypeWriter($"Do some quick maths to fix the warp core. {one}x{two} = ");
-        if (int.Parse(Console.ReadLine()) == one * two)
-        {
-            warpCoreWorking = true;
-            faultCountdown = 10;
-        }
-        else
-        {
-            TypeWriter("That's wrong, you'll need to try again next round.");
-        }
-    }
-    else if (engineWorking == false && roomName == "Engine Room")
-    {
-        TypeWriter("The sublight engine is sputtering and slightly on fire. You need to fix this, quick.");
-        int one = gen.Next(1, 100);
-        int two = gen.Next(1, 100);
-        TypeWriter($"Do some quick maths to fix the engine. {one}x{two} = ");
-        if (int.Parse(Console.ReadLine()) == one * two)
-        {
-            warpCoreWorking = true;
-            faultCountdown = 10;
-        }
-        else
-        {
-            TypeWriter("That's wrong, you'll need to try again next round.");
-        }
-    }
-    if (roomName == "Captain's Quarters" && inventory.Contains("Keycard"))
-    {
-        TypeWriter("You find the safe hidden under the captain's guess. You swipe the keycard and a combination lock comes out. You don't know the code, but you put your ear to the lock and begin guessing.");
-        guessCode();
-        TypeWriter("You hear a series of clicks and you find a little red key labelled ESCAPE PODS in the bottom of it. You pick it up.");
-        GivePlayer("Podkey", 1);
-    }
-    else if (roomName == "Command Centre" && inventory.Contains("Podkey"))
-    {
-        TypeWriter("You find the keyhole under a plexiglass wall that says FOR EMERGENCIES ONLY. You insert the key into the lock and turn it, and an automated sound says 'ESCAPE PODS ACTIVATED'.");
-        podsUnlocked = true;
-    }
-    if (roomName == "Escape Pods" && podsUnlocked)
-    {
-        break;
-    }
     player["Turn"]++;
     if (player["Turn"] >= turns || faultCountdown == 0)
     {
