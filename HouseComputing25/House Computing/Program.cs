@@ -478,33 +478,21 @@ while (player["Health"] > 0)
         string[] input = inputog.Split(' ');
         if (input[0] == "move")
         {
-            if (input[1] == "up" && gameboard.ContainsKey(MoveUp(playerpos)))
+            if (input[1] == "up" && gameboard.ContainsKey(MoveUp(playerpos)) && room.TryGetValue("north", out string value))
             {
-                if (room.ContainsValue(gameboard[MoveUp(playerpos)]))
-                {
-                    playerpos = MoveUp(playerpos);
-                }
+                playerpos = MoveUp(playerpos);
             }
-            else if (input[1] == "down" && gameboard.ContainsKey(MoveDown(playerpos)))
+            else if (input[1] == "down" && gameboard.ContainsKey(MoveDown(playerpos)) && room.TryGetValue("south", out string value2))
             {
-                if (room.ContainsValue(gameboard[MoveDown(playerpos)]))
-                {
-                    playerpos = MoveDown(playerpos);
-                }
+                playerpos = MoveDown(playerpos);
             }
-            else if (input[1] == "left" && gameboard.ContainsKey(MoveLeft(playerpos)))
+            else if (input[1] == "left" && gameboard.ContainsKey(MoveLeft(playerpos)) && room.TryGetValue("west", out string value3))
             {
-                if (room.ContainsValue(gameboard[MoveLeft(playerpos)]))
-                {
-                    playerpos = MoveLeft(playerpos);
-                }
+                playerpos = MoveLeft(playerpos);
             }
-            else if (input[1] == "right" && gameboard.ContainsKey(MoveRight(playerpos)))
+            else if (input[1] == "right" && gameboard.ContainsKey(MoveRight(playerpos)) && room.TryGetValue("east", out string value4))
             {
-                if (room.ContainsValue(gameboard[MoveRight(playerpos)]))
-                {
-                    playerpos = MoveRight(playerpos);
-                }
+                playerpos = MoveRight(playerpos);
             }
             else
             {
