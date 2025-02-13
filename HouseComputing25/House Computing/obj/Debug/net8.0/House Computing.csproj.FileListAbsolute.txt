@@ -12,3 +12,4 @@ C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_comp
 C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\House Computing.pdb
 C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\House Computing.genruntimeconfig.cache
 C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\ref\House Computing.dll
+C:\Users\22CJain\OneDrive - Merchant Taylors' School\Documents\GitHub\house_computing_25\HouseComputing25\House Computing\obj\Debug\net8.0\House Computing.sourcelink.json
