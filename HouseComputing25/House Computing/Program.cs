@@ -168,18 +168,10 @@ string RoomSay(int position)
 
 List<string> inventory = new List<string>();
 
-void GivePlayer(string newItem, int number)
-{
-    for (int i = number; i >= 0; i--)
-    {
-        inventory.Add(newItem);
-    }
+void GivePlayer(string newItem)
+{   
+    inventory.Add(newItem);
 }
-
-//i'm going to add the oxygen mechanic tmrw, after ~10 turns, you realise that you only have that much left.
-
-
-
 
 /*string[] GetMainInput(string prompt, string room)
 {
@@ -392,11 +384,11 @@ while (player["Health"] > 0)
     else if (player["Turn"] > 3 && warpCoreWorking && engineWorking)
     {
         int disaster = gen.Next(1, 20);
-        if (disaster < 3)
+        if (disaster < 5)
         {
             warpCoreWorking = false;
         }
-        else if (disaster <= 5)
+        else if (disaster <= 9)
         {
             engineWorking = false;
         }
@@ -438,7 +430,7 @@ while (player["Health"] > 0)
         TypeWriter("You find the safe hidden under the captain's guess. You swipe the keycard and a combination lock comes out. You don't know the code, but you put your ear to the lock and begin guessing.");
         guessCode();
         TypeWriter("You hear a series of clicks and you find a little red key labelled ESCAPE PODS in the bottom of it. You pick it up.");
-        GivePlayer("Podkey", 1);
+        GivePlayer("Podkey");
     }
     else if (roomName == "Command Centre" && inventory.Contains("Podkey"))
     {
@@ -504,7 +496,7 @@ while (player["Health"] > 0)
         {
             if (room["item"].ToLower() == input[1])
             {
-                GivePlayer(roomDescriptions[roomName]["item"], 1);
+                GivePlayer(roomDescriptions[roomName]["item"]);
             }
             else
             {
