@@ -122,8 +122,8 @@ Dictionary<string, Dictionary<string, string>> roomDescriptions = new Dictionary
     {
         ["coordinate"] = "13",
         ["name"] = "Engine Corridor",
-        ["left"] = "Communal Area",
-        ["right"] = "Engine Room",
+        ["west"] = "Communal Area",
+        ["east"] = "Engine Room",
         ["Description"] = "It's a corridor."
     }
 };
@@ -153,7 +153,7 @@ Dictionary<string, int> player = new Dictionary<string, int>
     //["Stamina"] = 100,
     //["Hunger"] = 100,
     //["Thirst"] = 100,
-    ["Health"] = 50,
+    ["Health"] = 30,
     //["Oxygen"] = 150,
     ["Position"] = 0,
     ["Turn"] = 0,
@@ -357,6 +357,7 @@ while (player["Health"] > 0)
     var room = roomDescriptions[roomName];
     string currentRoomDesc = room["Description"];
     bool validinput = false;
+    Debug.WriteLine($"player health: {player["Health"]}");
     Console.Clear();
     Console.Write("[");
     for (int i = 0; i < player["Health"]; i++)
@@ -375,7 +376,7 @@ while (player["Health"] > 0)
             if (gen.Next(1, 5) < 3)
             {
                 int damage = gen.Next(1, 8) + 2;
-                player["Health"] -= damage;
+                player["Health"] = player["Health"] - damage;
                 TypeWriter($"The ship suddenly jolts. You take {damage} damage. You should fix it as soon as possible.");
             }
         }
@@ -497,6 +498,10 @@ while (player["Health"] > 0)
             if (room["item"].ToLower() == input[1])
             {
                 GivePlayer(roomDescriptions[roomName]["item"]);
+                if(roomName == "Storeroom")
+                {
+                    roomDescriptions["Storeroom"].Remove("item");
+                }
             }
             else
             {
@@ -509,14 +514,14 @@ while (player["Health"] > 0)
                 "|                         |        Study            |                         |        Escape pods      |\r\n" +
                 "|                         |                         |                         |        (escape)         |\r\n" +
                 "+-------------------------+----------   ------------+-------------------------+----------   ------------+\r\n" +
-                "|    Captain's Office     |       Sleeping          |        Store Room       |                         |\r\n" +
+                "|    Captain's Office     |       Sleeping          |        Store Room       |         Corridor        |\r\n" +
                 "|   (command centre key)          Quarters               (find key to safe)   |                         |\r\n" +
                 "+-------------------------+----------   ------------+-------------------------+----------   ------------+\r\n" +
-                "|                         |      Communal area      |                         |      Engine room        |\r\n" +
-                "|   Command centre                                                                                      |\r\n" +
+                "|                         |                         |                         |      Engine room        |\r\n" +
+                "|   Command centre               Communal area                Corridor                                  |\r\n" +
                 "| (unlock escape pods)    |                         |                         |                         |\r\n" +
                 "+-------------------------+----------   ------------+-------------------------+----------   ------------+\r\n" +
-                "|        Gym                       Kitchen          |                         |                         |\r\n" +
+                "|        Gym                       Kitchen          |                         |         Corridor        |\r\n" +
                 "+-------------------------+-------------------------+-------------------------+----------   ------------+\r\n" +
                 "|                         |                         |                         |      Warp core          |\r\n" +
                 "+-------------------------+-------------------------+-------------------------+-------------------------+");
