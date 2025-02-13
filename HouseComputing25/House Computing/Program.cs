@@ -308,7 +308,7 @@ bool guessCode()
             }
         }
 
-        if (output.ToString() == code)
+        if (guess.ToString() == code)
         {
             isFixed = true;
         }
