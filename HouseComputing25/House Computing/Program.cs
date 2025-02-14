@@ -495,7 +495,7 @@ while (player["Health"] > 0)
         }
         else if (input[0] == "get")
         {
-            if (room["item"].ToLower() == input[1])
+            if (room.ContainsKey("item") && room["item"].ToLower() == input[1])
             {
                 GivePlayer(roomDescriptions[roomName]["item"]);
                 if(roomName == "Storeroom")
@@ -505,6 +505,8 @@ while (player["Health"] > 0)
             }
             else
             {
+                Console.WriteLine("Invalid Input, press ENTER");
+                Console.ReadLine();
                 validinput = false;
             }
         }
